@@ -11,14 +11,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
-    <maven.compiler.source>14</maven.compiler.source>
-    <maven.compiler.target>14</maven.compiler.target>
     <checkstyle.version>8.42</checkstyle.version>
     <testng.version>7.4.0</testng.version>
     <calculator.version>1.0</calculator.version>
     <testng.configs.path>${project.build.testOutputDirectory}/testngconfigs</testng.configs.path>
     <testng.suite.file/>
     <surefire.version>3.0.0-M5</surefire.version>
+    <lombok.version>1.18.20</lombok.version>
     <compiler.version>3.8.1</compiler.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
   </properties>
@@ -48,7 +47,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>RELEASE</version>
+      <version>${lombok.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
