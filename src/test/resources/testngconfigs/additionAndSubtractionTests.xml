@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="additionAndSubtractionTests">
+  <test name="addAndSubtract">
+    <groups>
+      <run>
+        <include name="addition"/>
+        <include name="subtraction"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="ru.training.at.hw1" />
+    </packages>
+    <classes>
+      <class name="ru.training.at.hw1.AdditionTest"/>
+      <class name="ru.training.at.hw1.SubtractionTest"/>
+    </classes>
+  </test>
+</suite>

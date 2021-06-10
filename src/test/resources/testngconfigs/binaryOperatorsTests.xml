@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="binaryOperatorsTests">
+  <suite-files>
+    <suite-file path="additionAndSubtractionTests.xml" />
+    <suite-file path="divisionAndMultiplicationTests.xml" />
+  </suite-files>
+</suite>
