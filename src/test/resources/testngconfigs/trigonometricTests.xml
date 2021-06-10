@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="trigonometricTests">
+  <test name="TrigonometricFunctionsTest">
+    <groups>
+      <run>
+        <include name="trigonometric"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="ru.training.at.hw1" />
+    </packages>
+    <classes>
+      <class name="ru.training.at.hw1.CosineTest"/>
+    </classes>
+  </test>
+</suite>

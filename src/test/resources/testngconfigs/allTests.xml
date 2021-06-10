@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="allTests">
+  <suite-files>
+    <suite-file path="binaryOperatorsTests.xml" />
+    <suite-file path="trigonometricTests.xml" />
+  </suite-files>
+</suite>
