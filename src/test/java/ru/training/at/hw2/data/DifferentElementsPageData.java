@@ -28,6 +28,8 @@ public class DifferentElementsPageData {
 
     public static final String YELLOW = "Yellow";
 
+    public static final String SELEN = "Selen";
+
     public static final int EXPECTED_LOGS_COUNT = 4;
 
     public static final List<String> LOGS_SUFFIXES = List.of(

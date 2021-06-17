@@ -1,14 +1,16 @@
 package ru.training.at.hw2.ex2;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import org.checkerframework.common.value.qual.IntRange;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import ru.training.at.hw2.BaseJdiTestingIndexPageTest;
 import ru.training.at.hw2.data.DifferentElementsPageData;
+import ru.training.at.hw2.data.JdiTestingIndexPageData;
 
 public class DifferentElementsPageTest extends BaseJdiTestingIndexPageTest {
 
@@ -16,101 +18,176 @@ public class DifferentElementsPageTest extends BaseJdiTestingIndexPageTest {
 
     @Test
     public void secondExerciseDifferentElementsTest() {
-        openTestSiteByURL();
-        assertBrowserTitle();
-        performLogin();
-        assertUserName();
-        openDifferentElementsPage();
-        selectWaterAndWindCheckboxes();
-        selectSelenInRadio();
-        selectYellowInDropdown();
-        checkLogs();
-        assertAccumulator.assertAll();
-    }
+        SoftAssertions assertAccumulator = new SoftAssertions();
+        // 1. Open test site by URL
+        openSiteByURL(JdiTestingIndexPageData.PAGE_URL);
+        assertOpenedSiteIsCorrectByURL(assertAccumulator, getActualURL(), JdiTestingIndexPageData.PAGE_URL);
 
-    private void openDifferentElementsPage() {
+        // 2. Assert Browser title
+        assertBrowserTitle(assertAccumulator, getActualTitle(), JdiTestingIndexPageData.PAGE_TITLE);
+
+        // 3. Perform login
+        performLogin(JdiTestingIndexPageData.LOGIN, JdiTestingIndexPageData.PASSWORD);
+
+        // 4. Assert Username is loggined
+        assertLoginSuccess(assertAccumulator, isLogoutButtonDisplayed());
+        assertUsernameLabelIsDisplayed(assertAccumulator, isUsernameLabelDisplayed());
+        assertUsername(assertAccumulator, getActualUsername(), JdiTestingIndexPageData.USERNAME.toUpperCase());
+
         // 5. Open through the header menu Service -> Different Elements Page
-        driver.findElement(Locators.DROPDOWN).click();
-        WebElement linkElement = driver.findElement(Locators.DIFFERENT_ELEMENTS_PAGE_LINK);
-        String link = linkElement.getAttribute(DifferentElementsPageData.HREF_ATTRIBUTE);
-        assertAccumulator.assertEquals(link, DifferentElementsPageData.DIFFERENT_ELEMENTS_PAGE_LINK);
-
-        linkElement.click();
-
-        assertAccumulator.assertEquals(
-            driver.getTitle(),
+        openDifferentElementsPage();
+        assertCurrentPageIsDifferentElementsPage(
+            assertAccumulator,
+            getActualTitle(),
             DifferentElementsPageData.DIFFERENT_ELEMENTS_TITLE
         );
-    }
 
-    private void selectWaterAndWindCheckboxes() {
         // 6. Select checkboxes
-        List<WebElement> checkboxes = driver.findElements(Locators.CHECKBOXES);
-        assertAccumulator.assertEquals(checkboxes.size(), DifferentElementsPageData.CHECKBOXES_COUNT);
-
-        WebElement waterCheckBox = checkboxes.get(DifferentElementsPageData.WATER_CHECKBOX_ORDER);
-        assertAccumulator.assertEquals(
-            waterCheckBox.findElement(PARENT_NODE).getText(),
+        selectCheckbox(getCheckboxByOrder(getCheckboxes(), DifferentElementsPageData.WATER_CHECKBOX_ORDER));
+        assertCheckBoxText(
+            assertAccumulator,
+            getCheckboxText(getCheckboxByOrder(getCheckboxes(), DifferentElementsPageData.WATER_CHECKBOX_ORDER)),
             DifferentElementsPageData.WATER_CHECKBOX_LABEL
         );
-
-        WebElement windCheckBox = checkboxes.get(DifferentElementsPageData.WIND_CHECKBOX_ORDER);
-        assertAccumulator.assertEquals(
-            windCheckBox.findElement(PARENT_NODE).getText(),
+        assertCheckboxChecked(
+            assertAccumulator,
+            isChecked(getCheckboxByOrder(getCheckboxes(), DifferentElementsPageData.WATER_CHECKBOX_ORDER))
+        );
+        selectCheckbox(getCheckboxByOrder(getCheckboxes(), DifferentElementsPageData.WIND_CHECKBOX_ORDER));
+        assertCheckBoxText(
+            assertAccumulator,
+            getCheckboxText(getCheckboxByOrder(getCheckboxes(), DifferentElementsPageData.WIND_CHECKBOX_ORDER)),
             DifferentElementsPageData.WIND_CHECKBOX_LABEL
         );
-
-        assertAccumulator.assertTrue(waterCheckBox.isDisplayed());
-        assertAccumulator.assertTrue(windCheckBox.isDisplayed());
-        assertAccumulator.assertFalse(waterCheckBox.isSelected());
-        assertAccumulator.assertFalse(windCheckBox.isSelected());
-
-        waterCheckBox.click();
-        windCheckBox.click();
-
-        assertAccumulator.assertTrue(waterCheckBox.isSelected());
-        assertAccumulator.assertTrue(windCheckBox.isSelected());
-    }
-
-    private void selectSelenInRadio() {
-        // 7. Select radio
-        List<WebElement> radioButtons = driver.findElements(Locators.RADIO_BUTTONS);
-        assertAccumulator.assertEquals(radioButtons.size(), DifferentElementsPageData.RADIO_BUTTONS_COUNT);
-
-        WebElement selenButton = radioButtons.get(DifferentElementsPageData.SELEN_RADIO_ORDER);
-        assertAccumulator.assertTrue(selenButton.isDisplayed());
-        assertAccumulator.assertFalse(selenButton.isSelected());
-
-        selenButton.click();
-        assertAccumulator.assertTrue(selenButton.isSelected());
-    }
-
-    private void selectYellowInDropdown() {
-        // 8. Select in dropdown
-        Select dropdownSelect = new Select(driver.findElement(Locators.COLOR_DROPDOWN));
-        dropdownSelect.selectByVisibleText(DifferentElementsPageData.YELLOW);
-
-        assertAccumulator.assertEquals(
-            dropdownSelect.getFirstSelectedOption().getText(),
-            DifferentElementsPageData.YELLOW
+        assertCheckboxChecked(
+            assertAccumulator,
+            isChecked(getCheckboxByOrder(getCheckboxes(), DifferentElementsPageData.WIND_CHECKBOX_ORDER))
         );
-    }
 
-    private void checkLogs() {
+        // 7. Select radio
+        assertRadioButtonIsSelected(
+            assertAccumulator,
+            !isRadioSelected(getRadioByOrder(getRadioButtons(), DifferentElementsPageData.SELEN_RADIO_ORDER))
+        );
+        selectRadio(getRadioByOrder(getRadioButtons(), DifferentElementsPageData.SELEN_RADIO_ORDER));
+        assertRadioButtonIsSelected(
+            assertAccumulator,
+            isRadioSelected(getRadioByOrder(getRadioButtons(), DifferentElementsPageData.SELEN_RADIO_ORDER))
+        );
+        assertRadioButtonText(
+            assertAccumulator,
+            getRadioButtonText(getRadioByOrder(getRadioButtons(), DifferentElementsPageData.SELEN_RADIO_ORDER)),
+            DifferentElementsPageData.SELEN
+        );
+
+        // 8. Select in dropdown
+        selectInDropdownListByText(getDropdownList(), DifferentElementsPageData.YELLOW);
+        assertDropdownListSelectedText(assertAccumulator, getActualDropdownListValue(),
+            DifferentElementsPageData.YELLOW);
+
         /* 9. Assert that
                 for each checkbox there is an individual log row and value is corresponded to the status of checkbox
                 for radio button there is a log row and value is corresponded to the status of radio button
                 for dropdown there is a log row and value is corresponded to the selected value.
         */
-        List<WebElement> logEntries = driver.findElements(Locators.LOG_ITEMS);
-        assertAccumulator.assertEquals(logEntries.size(), DifferentElementsPageData.EXPECTED_LOGS_COUNT);
+        assertTimelessLogsAreCorrect(assertAccumulator, getActualLogEntries(), DifferentElementsPageData.LOGS_SUFFIXES);
 
-        IntStream.range(0, logEntries.size())
-                 .forEach(index -> {
-                     assertAccumulator.assertTrue(
-                         logEntries.get(index).getText().endsWith(DifferentElementsPageData.LOGS_SUFFIXES.get(index))
-                     );
-                 });
+        assertAccumulator.assertAll();
+    }
+
+    private void openDifferentElementsPage() {
+        driver.findElement(Locators.DROPDOWN).click();
+        driver.findElement(Locators.DIFFERENT_ELEMENTS_PAGE_LINK).click();
+    }
+
+    private void assertCurrentPageIsDifferentElementsPage(SoftAssertions assertAccumulator, String actualTitle,
+                                                          String expectedTitle) {
+        assertAccumulator.assertThat(actualTitle).isEqualTo(expectedTitle);
+    }
+
+    private void selectCheckbox(WebElement checkbox) {
+        checkbox.click();
+    }
+
+    private void assertCheckBoxText(SoftAssertions assertAccumulator, String actualText, String expectedText) {
+        assertAccumulator.assertThat(actualText).isEqualTo(expectedText);
+    }
+
+    private void assertCheckboxChecked(SoftAssertions assertAccumulator, boolean isChecked) {
+        assertAccumulator.assertThat(isChecked).isTrue();
+    }
+
+    private void selectRadio(WebElement radio) {
+        radio.click();
+    }
+
+    private void assertRadioButtonIsSelected(SoftAssertions assertAccumulator, boolean isSelected) {
+        assertAccumulator.assertThat(isSelected).isTrue();
+    }
+
+    private void assertRadioButtonText(SoftAssertions assertAccumulator, String actualText, String expectedText) {
+        assertAccumulator.assertThat(actualText).isEqualTo(expectedText);
+    }
+
+    private void selectInDropdownListByText(WebElement dropdownList, String text) {
+        new Select(dropdownList).selectByVisibleText(text);
+    }
+
+    private void assertDropdownListSelectedText(SoftAssertions assertAccumulator, String actualText,
+                                                String expectedText) {
+        assertAccumulator.assertThat(actualText).isEqualTo(expectedText);
+    }
+
+    private void assertTimelessLogsAreCorrect(SoftAssertions assertAccumulator, List<String> actualEntries,
+                                              List<String> expectedEntries) {
+        assertAccumulator.assertThat(
+            actualEntries.stream().map(entry -> entry.substring(9)).collect(Collectors.toList())
+        ).hasSize(expectedEntries.size()).hasSameElementsAs(expectedEntries);
+
+    }
+
+    private String getCheckboxText(WebElement checkbox) {
+        return checkbox.findElement(PARENT_NODE).getText();
+    }
+
+    private boolean isChecked(WebElement checkbox) {
+        return checkbox.isSelected();
+    }
+
+    private WebElement getCheckboxByOrder(List<WebElement> checkboxes, int order) {
+        return checkboxes.get(order);
+    }
+
+    private List<WebElement> getCheckboxes() {
+        return driver.findElements(Locators.CHECKBOXES);
+    }
+
+    private boolean isRadioSelected(WebElement radioButton) {
+        return radioButton.isSelected();
+    }
+
+    private String getRadioButtonText(WebElement radioButton) {
+        return radioButton.findElement(PARENT_NODE).getText();
+    }
+
+    private WebElement getRadioByOrder(List<WebElement> radioButtons, int order) {
+        return radioButtons.get(order);
+    }
+
+    private List<WebElement> getRadioButtons() {
+        return driver.findElements(Locators.RADIO_BUTTONS);
+    }
+
+    private WebElement getDropdownList() {
+        return driver.findElement(Locators.COLOR_DROPDOWN);
+    }
+
+    private String getActualDropdownListValue() {
+        return new Select(getDropdownList()).getFirstSelectedOption().getText();
+    }
+
+    private List<String> getActualLogEntries() {
+        return driver.findElements(Locators.LOG_ITEMS).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     private static class Locators {
