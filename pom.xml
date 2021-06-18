@@ -10,16 +10,21 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
+    <java.version>11</java.version>
     <checkstyle.version>8.42</checkstyle.version>
     <testng.version>7.4.0</testng.version>
     <calculator.version>1.0</calculator.version>
     <testng.configs.path>${project.build.testOutputDirectory}/testngconfigs</testng.configs.path>
     <testng.suite.file/>
+    <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
     <surefire.version>3.0.0-M5</surefire.version>
     <lombok.version>1.18.20</lombok.version>
     <compiler.version>3.8.1</compiler.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
+    <assertj.version>3.20.0</assertj.version>
+    <webdrivermanager.version>4.4.3</webdrivermanager.version>
+    <selenium.version>4.0.0-beta-4</selenium.version>
+    <guice.version>5.0.1</guice.version>
   </properties>
 
   <dependencies>
@@ -45,6 +50,33 @@
     </dependency>
 
     <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>${webdrivermanager.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>${guice.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
@@ -57,7 +89,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>${maven.checkstyle.version}</version>
         <dependencies>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
@@ -89,15 +121,14 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${compiler.version}</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <release>${java.version}</release>
         </configuration>
       </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>${surefire.version}</version>
         <configuration>
           <suiteXmlFiles>
             <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
@@ -128,9 +159,6 @@
     </profile>
     <profile>
       <id>AdditionAndSubtraction</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <testng.suite.file>${testng.configs.path}/additionAndSubtractionTests.xml</testng.suite.file>
       </properties>
@@ -139,6 +167,16 @@
       <id>DivisionAndMultiplication</id>
       <properties>
         <testng.suite.file>${testng.configs.path}/divisionAndMultiplicationTests.xml</testng.suite.file>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>hw2seleniumTests</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/hw2seleniumTests.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
