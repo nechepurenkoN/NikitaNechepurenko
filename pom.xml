@@ -82,6 +82,24 @@
       <version>${lombok.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.4.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>4.4.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.20</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -172,11 +190,18 @@
 
     <profile>
       <id>hw2seleniumTests</id>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/hw2seleniumTests.xml</testng.suite.file>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>hw3seleniumTests</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <testng.suite.file>${testng.configs.path}/hw2seleniumTests.xml</testng.suite.file>
+        <testng.suite.file>${testng.configs.path}/hw3seleniumTests.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
