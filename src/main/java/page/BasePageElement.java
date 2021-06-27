@@ -3,7 +3,6 @@ package page;
 import static com.google.inject.Guice.createInjector;
 
 import driver.DriverWrapper;
-import driver.di.DriverModule;
 import java.time.Duration;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;

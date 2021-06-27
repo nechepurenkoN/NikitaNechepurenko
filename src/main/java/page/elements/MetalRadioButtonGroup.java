@@ -1,8 +1,8 @@
 package page.elements;
 
+import data.DifferentElementsPageData;
 import driver.DriverWrapper;
 import org.openqa.selenium.By;
-import utils.DifferentElementsPageData;
 
 public class MetalRadioButtonGroup extends RadioButtonGroup {
     private static final By selector = By.cssSelector(".checkbox-row .label-radio input");

@@ -1,7 +1,7 @@
 package driver;
 
 import com.google.inject.Inject;
-import driver.di.DriverModule;
+import di.DriverModule;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import lombok.SneakyThrows;

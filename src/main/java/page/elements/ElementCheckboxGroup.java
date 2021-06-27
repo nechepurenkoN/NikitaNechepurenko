@@ -1,8 +1,8 @@
 package page.elements;
 
+import data.DifferentElementsPageData;
 import driver.DriverWrapper;
 import org.openqa.selenium.By;
-import utils.DifferentElementsPageData;
 
 public final class ElementCheckboxGroup extends CheckboxGroup {
     private static final By selector = By.cssSelector(".checkbox-row .label-checkbox input");

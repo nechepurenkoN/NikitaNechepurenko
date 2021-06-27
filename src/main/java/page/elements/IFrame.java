@@ -1,11 +1,11 @@
 package page.elements;
 
+import data.JdiTestingIndexPageData;
 import driver.DriverWrapper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import page.BasePageElement;
-import utils.JdiTestingIndexPageData;
 
 public class IFrame extends BasePageElement {
     private final Title title;

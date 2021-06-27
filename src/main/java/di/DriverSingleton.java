@@ -1,4 +1,4 @@
-package driver.di;
+package di;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;

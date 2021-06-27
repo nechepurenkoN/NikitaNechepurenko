@@ -1,8 +1,7 @@
-package utils;
+package data;
 
 import java.util.List;
 import lombok.experimental.UtilityClass;
-import utils.JdiTestingIndexPageData;
 
 @UtilityClass
 public class DifferentElementsPageData {

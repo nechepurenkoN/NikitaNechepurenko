@@ -1,5 +1,7 @@
 package ru.training.at.hw3;
 
+import data.DifferentElementsPageData;
+import data.JdiTestingIndexPageData;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.assertj.core.api.SoftAssertions;
@@ -11,8 +13,6 @@ import page.elements.LoginForm;
 import page.elements.MetalRadioButtonGroup;
 import page.objects.DifferentElementsPage;
 import page.objects.JdiTestingIndexPage;
-import utils.DifferentElementsPageData;
-import utils.JdiTestingIndexPageData;
 
 public class DifferentElementsPageTest extends BaseJdiTestingIndexPageTest {
 
@@ -29,7 +29,7 @@ public class DifferentElementsPageTest extends BaseJdiTestingIndexPageTest {
 
         // 3. Perform login
         LoginForm loginForm = indexPage.getLoginForm();
-        loginForm.loginUser(JdiTestingIndexPageData.LOGIN, JdiTestingIndexPageData.PASSWORD);
+        loginForm.loginUser(user.getLogin(), user.getPassword());
 
         // 4. Assert Username is loggined
         assertLoginSuccess(assertAccumulator, loginForm.isLoggedIn());
@@ -37,7 +37,7 @@ public class DifferentElementsPageTest extends BaseJdiTestingIndexPageTest {
         assertUsername(
             assertAccumulator,
             loginForm.getCurrentUser(),
-            JdiTestingIndexPageData.USERNAME.toUpperCase()
+            user.getUsername().toUpperCase()
         );
 
         // 5. Open through the header menu Service -> Different Elements Page

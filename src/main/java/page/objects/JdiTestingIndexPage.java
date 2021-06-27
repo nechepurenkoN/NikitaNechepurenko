@@ -1,11 +1,11 @@
 package page.objects;
 
+import data.JdiTestingIndexPageData;
 import driver.DriverWrapper;
 import lombok.Getter;
 import page.elements.Benefit;
 import page.elements.IFrame;
 import page.elements.Title;
-import utils.JdiTestingIndexPageData;
 
 @Getter
 public class JdiTestingIndexPage extends BaseJdiTestingPage {

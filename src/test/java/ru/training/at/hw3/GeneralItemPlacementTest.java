@@ -1,5 +1,6 @@
 package ru.training.at.hw3;
 
+import data.JdiTestingIndexPageData;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
@@ -8,7 +9,6 @@ import page.elements.HeaderNavbar;
 import page.elements.IFrame;
 import page.elements.SidebarNav;
 import page.objects.JdiTestingIndexPage;
-import utils.JdiTestingIndexPageData;
 
 public class GeneralItemPlacementTest extends BaseJdiTestingIndexPageTest {
 
@@ -24,7 +24,7 @@ public class GeneralItemPlacementTest extends BaseJdiTestingIndexPageTest {
         assertBrowserTitle(assertAccumulator, indexPage.getActualTitle(), JdiTestingIndexPageData.PAGE_TITLE);
 
         // 3. Perform login
-        indexPage.loginUser(JdiTestingIndexPageData.LOGIN, JdiTestingIndexPageData.PASSWORD);
+        indexPage.loginUser(user.getLogin(), user.getPassword());
 
         // 4. Assert Username is loggined
         assertLoginSuccess(assertAccumulator, indexPage.isLoggedIn());
@@ -32,7 +32,7 @@ public class GeneralItemPlacementTest extends BaseJdiTestingIndexPageTest {
         assertUsername(
             assertAccumulator,
             indexPage.getCurrentUser(),
-            JdiTestingIndexPageData.USERNAME.toUpperCase()
+            user.getUsername().toUpperCase()
         );
 
         // 5. Assert that there are 4 items on the header section are displayed and they have proper texts

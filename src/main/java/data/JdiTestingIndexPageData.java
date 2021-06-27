@@ -1,12 +1,14 @@
-package utils;
+package data;
 
-import driver.di.DriverModule;
+import com.google.inject.Inject;
+import di.PropertiesModule;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.testng.annotations.Guice;
 
 @UtilityClass
 public class JdiTestingIndexPageData {
@@ -15,12 +17,6 @@ public class JdiTestingIndexPageData {
     public static final String PAGE_URL = BASE_URL + "index.html";
 
     public static final String PAGE_TITLE = "Home Page";
-
-    public static final String LOGIN = getLogin();
-
-    public static final String PASSWORD = getPassword();
-
-    public static final String USERNAME = "Roman Iovlev";
 
     public static final int IMAGE_COUNT = 4;
 
@@ -59,7 +55,7 @@ public class JdiTestingIndexPageData {
         Stream.of("Elements packs")
     ).collect(Collectors.toList());
 
-    private static final String USER_CREDENTIALS_PATH = "/data/usercredentials.properties";
+    public static final String USER_CREDENTIALS_PATH = "/data/usercredentials.properties";
 
     @SneakyThrows
     private static String getLogin() {

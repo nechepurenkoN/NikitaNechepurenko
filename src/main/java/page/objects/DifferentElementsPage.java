@@ -1,12 +1,12 @@
 package page.objects;
 
+import data.DifferentElementsPageData;
 import driver.DriverWrapper;
 import lombok.Getter;
 import page.elements.ColorDropdownList;
 import page.elements.ElementCheckboxGroup;
 import page.elements.LogArea;
 import page.elements.MetalRadioButtonGroup;
-import utils.DifferentElementsPageData;
 
 @Getter
 public class DifferentElementsPage extends BaseJdiTestingPage {

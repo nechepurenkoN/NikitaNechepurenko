@@ -1,12 +1,12 @@
 package page.elements;
 
+import data.DifferentElementsPageData;
 import driver.DriverWrapper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import page.BasePageElement;
-import utils.DifferentElementsPageData;
 
 public class ColorDropdownList extends BasePageElement {
     @FindBy(css = ".colors select")
