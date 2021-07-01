@@ -1,12 +1,12 @@
 package data;
 
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
+@Value
 public class User {
-    private final String login;
-    private final String username;
-    private final String password;
+    String login;
+    String username;
+    String password;
 
     public User(String login, String username, String password) {
         this.login = login;

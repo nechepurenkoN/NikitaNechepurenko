@@ -12,20 +12,21 @@ public class ColorDropdownList extends BasePageElement {
     @FindBy(css = ".colors select")
     private WebElement dropdownList;
 
-    private final Select select;
-
     public ColorDropdownList(DriverWrapper driver) {
         super(driver);
         PageFactory.initElements(driver.self(), this);
-        select = new Select(dropdownList);
     }
 
     public String getActualColor() {
-        return select.getFirstSelectedOption().getText();
+        return new Select(dropdownList).getFirstSelectedOption().getText();
     }
 
     public void selectYellow() {
-        select.selectByVisibleText(DifferentElementsPageData.YELLOW);
+        new Select(dropdownList).selectByVisibleText(DifferentElementsPageData.YELLOW);
+    }
+
+    public void selectByValue(String value) {
+        new Select(dropdownList).selectByVisibleText(value);
     }
 
 }
