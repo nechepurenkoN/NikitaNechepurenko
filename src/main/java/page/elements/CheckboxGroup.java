@@ -7,42 +7,46 @@ import org.openqa.selenium.WebElement;
 import page.BasePageElement;
 
 public abstract class CheckboxGroup extends BasePageElement {
-    protected List<WebElement> checkboxList;
     private static final By PARENT_NODE = By.xpath("./..");
+    private final By selector;
 
     protected CheckboxGroup(DriverWrapper driver, By selector) {
         super(driver);
-        checkboxList = driver.findElements(selector);
+        this.selector = selector;
     }
 
     public boolean isDisplayed() {
-        return checkboxList.stream().allMatch(WebElement::isDisplayed);
+        return getCheckboxList().stream().allMatch(WebElement::isDisplayed);
     }
 
     private WebElement getElementByText(String text) {
-        return checkboxList.stream()
+        return getCheckboxList().stream()
                            .filter(webElement -> webElement.findElement(PARENT_NODE).getText().equals(text))
                            .findFirst()
                            .orElseThrow();
     }
 
-    protected boolean isCheckedByOrder(int order) {
-        return checkboxList.get(order).isSelected();
+    public boolean isCheckedByOrder(int order) {
+        return getCheckboxList().get(order).isSelected();
     }
 
-    protected boolean isCheckedByText(String text) {
+    public boolean isCheckedByText(String text) {
         return getElementByText(text).isSelected();
     }
 
-    protected void selectCheckboxByOrder(int order) {
-        checkboxList.get(order).click();
+    public void selectCheckboxByOrder(int order) {
+        getCheckboxList().get(order).click();
     }
 
-    protected String getCheckboxTextByOrder(int order) {
-        return checkboxList.get(order).findElement(PARENT_NODE).getText();
+    public String getCheckboxTextByOrder(int order) {
+        return getCheckboxList().get(order).findElement(PARENT_NODE).getText();
     }
 
-    protected void selectCheckboxByText(String text) {
+    public void selectCheckboxByText(String text) {
         getElementByText(text).click();
+    }
+
+    private List<WebElement> getCheckboxList() {
+        return driver.findElements(selector);
     }
 }

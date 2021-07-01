@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="hw3seleniumTests">
+<suite name="hw4seleniumTests">
   <test name="jdiTestingPagesTest">
     <packages>
-      <package name="ru.training.at.hw3"/>
+      <package name="ru.training.at.hw4.tests"/>
     </packages>
   </test>
 </suite>
