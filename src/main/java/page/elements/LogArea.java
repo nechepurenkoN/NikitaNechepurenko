@@ -12,6 +12,8 @@ public class LogArea extends BasePageElement {
     @FindBy(css = ".logs li")
     private List<WebElement> logEntries;
 
+    private final int timeMarkSplitIndex = 9;
+
     public LogArea(DriverWrapper driver) {
         super(driver);
         PageFactory.initElements(driver.self(), this);
@@ -19,5 +21,12 @@ public class LogArea extends BasePageElement {
 
     public List<String> getLogEntries() {
         return logEntries.stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public List<String> getTimelessEntries() {
+        return logEntries.stream()
+                         .map(WebElement::getText)
+                         .map(row -> row.substring(timeMarkSplitIndex))
+                         .collect(Collectors.toList());
     }
 }
