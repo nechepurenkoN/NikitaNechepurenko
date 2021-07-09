@@ -3,6 +3,7 @@ package di;
 import com.google.inject.AbstractModule;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Properties;
 import lombok.SneakyThrows;
 
@@ -28,6 +29,9 @@ public class DriverModule extends AbstractModule {
 
     @SneakyThrows
     static String getBrowserNameFromConfig() {
+        if (Objects.nonNull(System.getProperty("browser.name"))) {
+            return System.getProperty("browser.name");
+        }
         Properties prop = new Properties();
         prop.loadFromXML(DriverModule.class.getResourceAsStream(DRIVER_CONFIG_PATH));
         return prop.getProperty(BROWSER_PROPERTY_NAME);

@@ -203,11 +203,18 @@
 
     <profile>
       <id>hw4seleniumTests</id>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/hw4seleniumTests.xml</testng.suite.file>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>hw6seleniumTests</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <testng.suite.file>${testng.configs.path}/hw4seleniumTests.xml</testng.suite.file>
+        <testng.suite.file>${testng.configs.path}/hw6seleniumTests.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
