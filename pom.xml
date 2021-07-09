@@ -209,6 +209,13 @@
     </profile>
 
     <profile>
+      <id>hw5seleniumTests</id>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/hw5seleniumTests.xml</testng.suite.file>
+      </properties>
+    </profile>
+
+    <profile>
       <id>hw6seleniumTests</id>
       <activation>
         <activeByDefault>true</activeByDefault>
