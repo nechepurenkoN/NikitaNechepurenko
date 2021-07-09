@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="hw6seleniumTests">
+  <test name="jdiTestingPagesTest">
+    <packages>
+      <package name="ru.training.at.hw6.tests"/>
+    </packages>
+  </test>
+</suite>
