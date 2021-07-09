@@ -28,6 +28,7 @@
     <allure.version>2.13.2</allure.version>
     <allure.plugin.version>2.10.0</allure.plugin.version>
     <aspectj.version>1.9.5</aspectj.version>
+    <cucumber.version>6.10.4</cucumber.version>
   </properties>
 
   <dependencies>
@@ -89,6 +90,19 @@
       <version>${allure.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-testng</artifactId>
+      <version>${cucumber.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${cucumber.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -203,11 +217,18 @@
 
     <profile>
       <id>hw4seleniumTests</id>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/hw4seleniumTests.xml</testng.suite.file>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>hw5seleniumTests</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <testng.suite.file>${testng.configs.path}/hw4seleniumTests.xml</testng.suite.file>
+        <testng.suite.file>${testng.configs.path}/hw5seleniumTests.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
