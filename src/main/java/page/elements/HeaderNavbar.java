@@ -35,4 +35,12 @@ public class HeaderNavbar extends BasePageElement {
     public void clickOnDifferentElementsPageLink() {
         click(driver.findElement(By.cssSelector(".nav .dropdown-menu li:nth-child(8) > a")));
     }
+
+    public void clickOnDropdownItemByName(String item) {
+        driver.findElements(By.cssSelector(".nav .dropdown-menu li > a"))
+              .stream()
+              .filter(webElement -> webElement.getText().equals(item.toUpperCase()))
+              .findFirst()
+              .ifPresent(this::click);
+    }
 }
