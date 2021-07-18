@@ -16,7 +16,7 @@ public class MetalsAndColorsPageTest implements TestsInit {
         dataProvider = "romanWithMetalAndColors",
         dataProviderClass = MetalAndColorsData.class
     )
-    public void openJdiTestingSite(User user, MetalAndColors formData) {
+    public void metalAndColorsPageFormTest(User user, MetalAndColors formData) {
         homePage.open();
         homePage.checkOpened();
         loginForm.login(user);
