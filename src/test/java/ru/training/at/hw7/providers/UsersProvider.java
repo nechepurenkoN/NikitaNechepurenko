@@ -1,23 +1,27 @@
 package ru.training.at.hw7.providers;
 
-import static com.google.inject.Guice.createInjector;
+import static di.PropertiesModule.PROPERTIES_PATH;
 
-import di.PropertiesModule;
+import java.io.IOException;
+import java.util.Properties;
 import ru.training.at.hw7.dto.User;
 
 public class UsersProvider {
 
-    public static User ROMAN = new User().set((user) -> {
-        data.User roman = getUserFromProperties("Roman Iovlev");
-        user.name = roman.getLogin();
-        user.password = roman.getPassword();
+    private static final Properties props;
+
+    static {
+        props = new Properties();
+        try {
+            props.load(UsersProvider.class.getResourceAsStream(PROPERTIES_PATH));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static User DEFAULT_USER = new User().set(user -> {
+        user.name = props.getProperty("login");
+        user.password = props.getProperty("password");
     });
 
-    private static data.User getUserFromProperties(String username) {
-        data.User userFromProperties = createInjector(new PropertiesModule()).getInstance(data.User.class);
-        if (userFromProperties.getUsername().equals(username)) {
-            return userFromProperties;
-        }
-        throw new IllegalArgumentException("No such user in the database");
-    }
 }

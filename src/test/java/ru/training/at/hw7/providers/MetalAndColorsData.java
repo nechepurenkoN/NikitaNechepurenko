@@ -13,7 +13,7 @@ public class MetalAndColorsData {
 
     @DataProvider(name = "romanWithMetalAndColors")
     public static Object[][] romanWithMetalAndColors() {
-        User roman = UsersProvider.ROMAN;
+        User roman = UsersProvider.DEFAULT_USER;
         return getMetalAndColorsValuesFromEx8().values().stream()
                                                .map(e -> new Object[] {roman, e})
                                                .toArray(Object[][]::new);
