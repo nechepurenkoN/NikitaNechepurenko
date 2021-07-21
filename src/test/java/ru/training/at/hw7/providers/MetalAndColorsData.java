@@ -6,16 +6,14 @@ import java.util.Map;
 import lombok.SneakyThrows;
 import org.testng.annotations.DataProvider;
 import ru.training.at.hw7.dto.MetalAndColors;
-import ru.training.at.hw7.dto.User;
 
 public class MetalAndColorsData {
     private static final String JDI_EX8_PATH = "/data/JDI_ex8_metalsColorsDataSet.json";
 
     @DataProvider(name = "romanWithMetalAndColors")
     public static Object[][] romanWithMetalAndColors() {
-        User roman = UsersProvider.DEFAULT_USER;
         return getMetalAndColorsValuesFromEx8().values().stream()
-                                               .map(e -> new Object[] {roman, e})
+                                               .map(e -> new Object[] {e})
                                                .toArray(Object[][]::new);
     }
 
