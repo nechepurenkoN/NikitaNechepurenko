@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Link;
 
 public class HomePage extends WebPage {
-    @UI(".nav > li:nth-child(4) > a")
+    @UI("//header//a[@href='metals-colors.html']")
     public static Link headerMetalAndColorsLink;
 
     public void openMetalsAndColorsPage() {
