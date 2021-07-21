@@ -20,7 +20,6 @@ public class MetalsAndColorsPageTest implements TestsInit {
         homePage.open();
         homePage.checkOpened();
         loginForm.login(user);
-        userName.assertThat().displayed();
         homePage.openMetalsAndColorsPage();
         metalAndColorsPage.checkOpened();
         metalAndColorsPage.submit(formData);

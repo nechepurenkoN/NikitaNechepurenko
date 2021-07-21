@@ -20,14 +20,15 @@ public class LoginForm extends Form<User> {
     public static Button logoutButton;
     @UI(".navbar-right .dropdown-toggle")
     public static Button dropdownButton;
+    @UI(".login-txt")
+    public static Text loginFailed;
 
     public void login(User user) {
-        if (userName.isDisplayed()) {
-            logout();
-        }
         dropdownButton.click();
         this.fill(user);
         loginButton.click();
+        loginFailed.assertThat().hidden();
+        userName.assertThat().displayed();
     }
 
     public void logout() {
