@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import java.util.List;
 import ru.training.at.hw7.dto.MetalAndColors;
 
 public class MetalAndColorsForm extends Form<MetalAndColors> {
@@ -63,9 +64,20 @@ public class MetalAndColorsForm extends Form<MetalAndColors> {
     }
 
     private void fillVegetables(MetalAndColors entity) {
+        List<String> vegetablesList = entity.getVegetables();
         vegetablesCaret.click();
-        vegetables.list().stream().filter(UIElement::isSelected).map(UIElement::label).forEach(HasClick::click);
-        entity.getVegetables().forEach(veg -> vegetables.select(veg));
+
+        vegetables.list().stream()
+                  .filter(UIElement::isSelected)
+                  .map(UIElement::label)
+                  .filter(label -> !vegetablesList.contains(label.text()))
+                  .forEach(HasClick::click);
+
+        vegetables.list().stream()
+                  .filter(e -> !e.isSelected())
+                  .map(UIElement::label)
+                  .filter(label -> vegetablesList.contains(label.text()))
+                  .forEach(HasClick::click);
     }
 
     @Override
