@@ -6,7 +6,7 @@ import java.util.Properties;
 import lombok.SneakyThrows;
 
 public class PropertiesModule extends AbstractModule {
-    private static final String PROPERTIES_PATH = "/data/usercredentials.properties";
+    public static final String PROPERTIES_PATH = "/data/usercredentials.properties";
 
     @Override
     protected void configure() {
